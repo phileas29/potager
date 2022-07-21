@@ -7,9 +7,13 @@ import org.springframework.stereotype.Service;
 
 import com.example.Potager.bo.EnumExpo;
 import com.example.Potager.bo.EnumSol;
+import com.example.Potager.bo.Plantation;
+import com.example.Potager.bo.Plante;
 import com.example.Potager.bo.Potager;
 import com.example.Potager.bo.Carre;
 import com.example.Potager.dal.CarreDAO;
+import com.example.Potager.dal.PlantationDAO;
+import com.example.Potager.dal.PlanteDAO;
 import com.example.Potager.dal.PotagerDAO;
 
 
@@ -21,6 +25,12 @@ public class PotagerManagerImpl implements PotagerManager {
 	
 	@Autowired
 	CarreDAO cDao;
+	
+	@Autowired
+	PlanteDAO plDao;
+	
+	@Autowired
+	PlantationDAO plaDao;
 
 	@Override
 	public void addCarreToPotager(Potager potager, int surface, EnumSol typeSol, EnumExpo typeExpo) {
@@ -35,6 +45,11 @@ public class PotagerManagerImpl implements PotagerManager {
 	}
 
 	@Override
+	public void addPlantation(Plantation pla) {
+		plaDao.save(pla);		
+	}
+
+	@Override
 	public List<Potager> findAllPotager() {
 		return (List<Potager>) pDao.findAll();
 	}
@@ -42,6 +57,21 @@ public class PotagerManagerImpl implements PotagerManager {
 	@Override
 	public List<Carre> finAllCarre() {
 		return (List<Carre>) cDao.findAll();
+	}
+
+	@Override
+	public List<Plante> findAllPlante() {
+		return (List<Plante>) plDao.findAll();
+	}
+
+	@Override
+	public void addPlante(Plante plante) {
+		plDao.save(plante);		
+	}
+
+	@Override
+	public Iterable<Carre> selectCarreByPotager(Potager potager) {
+		return cDao.selectAllCarreByPotager(potager);
 	}
 	
 	

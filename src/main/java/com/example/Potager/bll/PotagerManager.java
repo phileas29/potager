@@ -5,6 +5,8 @@ import java.util.List;
 import com.example.Potager.bo.Carre;
 import com.example.Potager.bo.EnumExpo;
 import com.example.Potager.bo.EnumSol;
+import com.example.Potager.bo.Plantation;
+import com.example.Potager.bo.Plante;
 import com.example.Potager.bo.Potager;
 
 public interface PotagerManager {
@@ -13,5 +15,8 @@ public interface PotagerManager {
 	public void addPotager(Potager potager);
 	public List<Potager> findAllPotager();
 	public List<Carre> finAllCarre();
-	
+	public List<Plante> findAllPlante();
+	public void addPlante(Plante plante);
+	public Iterable<Carre> selectCarreByPotager(Potager potager);
+	void addPlantation(Plantation pla);
 }
