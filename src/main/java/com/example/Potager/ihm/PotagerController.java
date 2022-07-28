@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.Potager.bll.PotagerException;
 import com.example.Potager.bll.PotagerManager;
+import com.example.Potager.bo.Carre;
 import com.example.Potager.bo.Potager;
 
 
@@ -94,6 +95,17 @@ public class PotagerController {
 			manager.addPotager(potager);
 	
 		return "redirect:/potager";
+	}
+	
+	@GetMapping("/{id}")
+	public String getPot(@PathVariable("id") Integer id, Model model) {
+		Potager potager = manager.getPotagerById(id);
+		ArrayList<Carre> carres = (ArrayList<Carre>)manager.selectCarreByPotager(potager);
+
+		model.addAttribute("potager", potager);
+		model.addAttribute("carres", carres);
+	
+		return "potager";
 	}
 	
 	

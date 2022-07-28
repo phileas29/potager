@@ -72,8 +72,8 @@ est dans un  ^</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>310</x>
-      <y>650</y>
+      <x>300</x>
+      <y>710</y>
       <w>210</w>
       <h>150</h>
     </coordinates>
@@ -93,22 +93,22 @@ est dans un  ^</panel_attributes>
       <x>260</x>
       <y>510</y>
       <w>170</w>
-      <h>160</h>
+      <h>220</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=1
 
 m2=1..n
 </panel_attributes>
-    <additional_attributes>10.0;10.0;150.0;140.0</additional_attributes>
+    <additional_attributes>10.0;10.0;140.0;200.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>420</x>
+      <x>410</x>
       <y>510</y>
-      <w>160</w>
-      <h>160</h>
+      <w>170</w>
+      <h>220</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=1
@@ -116,7 +116,7 @@ m1=1
 m2=1..n
 
 </panel_attributes>
-    <additional_attributes>140.0;10.0;10.0;140.0</additional_attributes>
+    <additional_attributes>150.0;10.0;10.0;200.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>

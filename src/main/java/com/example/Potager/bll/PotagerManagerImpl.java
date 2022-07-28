@@ -56,7 +56,7 @@ public class PotagerManagerImpl implements PotagerManager {
 	}
 
 	@Override
-	public List<Carre> finAllCarre() {
+	public List<Carre> findAllCarre() {
 		return (List<Carre>) cDao.findAll();
 	}
 

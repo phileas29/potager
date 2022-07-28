@@ -9,20 +9,15 @@
 <ul>
 	<table style="border:1px solid black;">
 		<tr>
-			<th>Nom</th>
-			<th>Adresse</th>
 			<th>Surface</th>
-			<th>Ville</th>
-			<th>Nombre de carrés</th>
+			<th>Type de sol</th>
+			<th>Type d'expo</th>
 			<th>Actions</th>
 		</tr>
-		<tr th:each="potager : ${list}">
-			<td><span th:text="${potager[0].nom}" /></td>
-			<td><a th:href="@{/potager/{id}(id=${potager[0].idPotager})}"><span th:text="${potager[0].nom}" /></a></td>
+		<tr th:each="carre : ${carres}">
+			<td><span th:text="${carre.surface}" /></td>
 			<td><span th:text="${potager[0].location}" /></td>
 			<td><span th:text="${potager[0].surface}" /></td>
-			<td><span th:text="${potager[0].ville}" /></td>
-			<td><span th:text="${potager[1]}" /></td>
 			<td colspan="2">
 				<a th:href="@{/potager/del/{id}(id=${potager[0].idPotager})}">X</a>
 				<a th:href="@{/potager/mod/{id}(id=${potager[0].idPotager})}">M</a>

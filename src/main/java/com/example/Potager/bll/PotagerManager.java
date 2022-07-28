@@ -16,7 +16,7 @@ public interface PotagerManager {
 	public void delPotagerById(int id);
 	public Potager getPotagerById(Integer id);
 	public List<Potager> findAllPotager();
-	public List<Carre> finAllCarre();
+	public List<Carre> findAllCarre();
 	public List<Plante> findAllPlante();
 	public void addPlante(Plante plante);
 	public Iterable<Carre> selectCarreByPotager(Potager potager);
