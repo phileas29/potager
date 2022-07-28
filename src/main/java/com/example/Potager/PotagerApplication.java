@@ -43,7 +43,7 @@ public class PotagerApplication implements CommandLineRunner {
 		plantes.add(new Plante("blette",EnumType.FEUILLE,"",50));
 		plantes.add(new Plante("tomate",EnumType.FRUIT,"coeur de boeuf",75));
 		plantes.add(new Plante("radis",EnumType.RACINE,"noir",25));
-		plantes.add(new Plante("épinard",EnumType.FEUILLE,"géant d'hiver",20));
+		plantes.add(new Plante("ï¿½pinard",EnumType.FEUILLE,"gï¿½ant d'hiver",20));
 		plantes.add(new Plante("carotte",EnumType.RACINE,"chantenay",22));
 		for (Plante plante : plantes) {
 			potagerManager.addPlante(plante);
@@ -79,6 +79,9 @@ public class PotagerApplication implements CommandLineRunner {
 //		for (Potager p : potagers) {
 //			potagerManager.selectCarreByPotager(p).forEach(System.out::println);
 //		}
+		System.out.println("potagerbyID TEST");
+		System.out.println(potagerManager.getPotagerById(1));
+		
 		System.err.println("****************\nFIN AFFICHAGE\n****************");
 		
 

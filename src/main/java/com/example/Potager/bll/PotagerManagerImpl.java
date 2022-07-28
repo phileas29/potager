@@ -1,5 +1,6 @@
 package com.example.Potager.bll;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,8 +71,30 @@ public class PotagerManagerImpl implements PotagerManager {
 	}
 
 	@Override
-	public Iterable<Carre> selectCarreByPotager(Potager potager) {
-		return cDao.selectAllCarreByPotager(potager);
+	public List<Carre> selectCarreByPotager(Potager potager) {
+		return (List<Carre>) cDao.selectAllCarreByPotager(potager);
+	}
+
+	@Override
+	public List<Integer> countCarreByPotager() {
+		List<Integer> listInt = new ArrayList<Integer>();
+		List<Potager> list = (List<Potager>) pDao.findAll();
+		for (Potager potager2 : list) {
+			listInt.add(((List<Carre>)cDao.selectAllCarreByPotager(potager2)).size());
+		}
+		
+		return listInt;
+	}
+
+	@Override
+	public void delPotagerById(int id) {
+		pDao.deleteById(id);
+	}
+
+	@Override
+	public Potager getPotagerById(Integer id) {
+		
+		return pDao.findById(id).orElse(null);
 	}
 	
 	

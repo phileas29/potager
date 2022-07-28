@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Saisie d'une potager</title>
+</head>
+<body>
+<h1>Saisie</h1>
+<form th:action="@{/potager/add}" th:object="${potager}" method="post">
+
+	<label for="location">location:</label>
+	<input type="text" th:field="*{location}" id="location"/>
+	<span th:if="${#fields.hasErrors('location')}" th:errors="*{location}"/>
+	<br>
+	<label for="nom">nom:</label>
+	<input type="text" th:field="*{nom}" id="nom"/>
+	<span th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"/>
+	<br>
+	<label for="surface">surface:</label>
+	<input type="number" th:field="*{surface}" id="surface"/>
+	<span th:if="${#fields.hasErrors('surface')}" th:errors="*{surface}"/>
+	<br>
+	<label for="ville">ville:</label>
+	<input type="ville" th:field="*{ville}" id="ville"/>
+	<span th:if="${#fields.hasErrors('ville')}" th:errors="*{ville}"/>
+	<br>
+	<input type="submit" value="valider"/>
+</form>
+</body>
+</html>

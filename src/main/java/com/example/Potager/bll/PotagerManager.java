@@ -13,10 +13,13 @@ public interface PotagerManager {
 	
 	public void addCarreToPotager(Potager potager, int surface, EnumSol typeSol, EnumExpo typeExpo);
 	public void addPotager(Potager potager);
+	public void delPotagerById(int id);
+	public Potager getPotagerById(Integer id);
 	public List<Potager> findAllPotager();
 	public List<Carre> finAllCarre();
 	public List<Plante> findAllPlante();
 	public void addPlante(Plante plante);
 	public Iterable<Carre> selectCarreByPotager(Potager potager);
+	public Iterable<Integer> countCarreByPotager();
 	void addPlantation(Plantation pla);
 }

@@ -3,6 +3,7 @@ package com.example.Potager.bo;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
 
 import lombok.Data;
 import lombok.Getter;
@@ -22,6 +23,7 @@ public class Potager {
 	@GeneratedValue
 	private Integer idPotager;
 	
+	@NotBlank
 	private String location;
 	private String nom;
 	private int surface;

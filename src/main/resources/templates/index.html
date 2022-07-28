@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Listes des potagers</title>
+</head>
+<body>
+<H1>La liste des potagers</H1>
+<ul> 
+	<li th:each="potager : ${list}">
+		<span th:text="${potager[0].location}" />
+		<span th:text="${potager[0].nom}" />
+		<span th:text="${potager[0].surface}" />
+		<span th:text="${potager[0].ville}" />
+		<span th:text="${potager[1]}" />
+		
+		<a th:href="@{/potager/del/{id}(id=${potager[0].idPotager})}">X</a>
+		<a th:href="@{/potager/mod/{id}(id=${potager[0].idPotager})}">M</a>
+	</li>
+</ul>
+<a href="/potager/add">ajout</a>
+</body>
+</html>
