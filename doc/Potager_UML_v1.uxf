@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>460</x>
+      <y>130</y>
+      <w>210</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>Potager
+--
+- loc : String
+- nom : String
+- surface : int
+- ville : String
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>460</x>
+      <y>370</y>
+      <w>210</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>Carré
+--
+- surface : int
+- typeSol : EnumSol
+- typeExpo : EnumExpo
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>550</x>
+      <y>260</y>
+      <w>120</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+m1=0..n
+m2=1
+est dans un  ^</panel_attributes>
+    <additional_attributes>10.0;110.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>170</x>
+      <y>370</y>
+      <w>210</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>Plante
+--
+- nom : String
+- type : EnumType
+- variete : String
+- surface : int
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>310</x>
+      <y>650</y>
+      <w>210</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>Plantation
+--
+- qte : int (&lt;3)
+- datePlante : Date
+- dateRecolte : Date
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>260</x>
+      <y>510</y>
+      <w>170</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1
+
+m2=1..n
+</panel_attributes>
+    <additional_attributes>10.0;10.0;150.0;140.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>420</x>
+      <y>510</y>
+      <w>160</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1
+
+m2=1..n
+
+</panel_attributes>
+    <additional_attributes>140.0;10.0;10.0;140.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>770</x>
+      <y>260</y>
+      <w>210</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>Action
+--
+- date : Date
+- evenement : String
+- lieu : 
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
