@@ -5,24 +5,22 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Data
 @ToString
 @Getter
 @Setter
 @NoArgsConstructor
 public class Potager {
-	
+
 	@Id
 	@GeneratedValue
 	private Integer idPotager;
-	
+
 	@NotBlank
 	private String location;
 	private String nom;

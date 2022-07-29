@@ -1,30 +1,45 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Listes des potagers</title>
-</head>
+
+<head th:insert="fragments/general.html :: header"></head>
+
 <body>
-<H1>La liste des potagers</H1>
-<ul>
-	<table style="border:1px solid black;">
-		<tr>
-			<th>Surface</th>
-			<th>Type de sol</th>
-			<th>Type d'expo</th>
-			<th>Actions</th>
-		</tr>
-		<tr th:each="carre : ${carres}">
-			<td><span th:text="${carre.surface}" /></td>
-			<td><span th:text="${potager[0].location}" /></td>
-			<td><span th:text="${potager[0].surface}" /></td>
-			<td colspan="2">
-				<a th:href="@{/potager/del/{id}(id=${potager[0].idPotager})}">X</a>
-				<a th:href="@{/potager/mod/{id}(id=${potager[0].idPotager})}">M</a>
-			</td>
-		</tr>
-	</table> 
-</ul>
-<a href="/potager/add">ajout</a>
+
+	<div class="container">
+		<div class="col-10 offset-1 mt-5">
+			<h1 class="text-center">La liste des carres du potager n°<span th:text="${potager.idPotager}" /> "<span th:text="${potager.nom}" />"</h1>
+
+			<table class="table mt-5">
+				<thead>
+					<tr>
+						<th scope="col">N°</th>
+						<th scope="col">Surface</th>
+						<th scope="col">Type de sol</th>
+						<th scope="col">Type d'expo</th>
+						<th scope="col">Nombre de plantations</th>
+						<th scope="col">Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="carre : ${carres}">
+						<td th:text="${carre[0].idCarre}"></td>
+						<td th:text="${carre[0].surface}"></td>
+						<td th:text="${carre[0].typeSol}"></td>
+						<td th:text="${carre[0].typeExpo}"></td>
+						<td th:text="${carre[1]}"></td>
+						<td>
+							<a th:href="@{/potager/{idP}/{idC}/mod(idP=${potager.idPotager},idC=${carre[0].idCarre})}" class="btn btn-primary">Ajouter des plants</a>
+							<a th:href="@{/potager/{idP}/{idC}/mod(idP=${potager.idPotager},idC=${carre[0].idCarre})}" class="btn btn-success">Modifier</a>
+							<a th:href="@{/potager/{idP}/{idC}/del(idP=${potager.idPotager},idC=${carre[0].idCarre})}" class="btn btn-danger">Supprimer</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<a th:href="@{/potager/{idP}/add(idP=${potager.idPotager})}" class="btn btn-primary">Ajouter un carré</a>
+		</div>
+	</div>
+
+	<script th:insert="fragments/general.html :: scriptBootstrap"></script>
 </body>
+
 </html>

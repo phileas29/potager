@@ -17,7 +17,6 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 public class Plante {
-	
 	@Id
 	@GeneratedValue
 	private Integer idPlante;

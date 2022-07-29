@@ -1,35 +1,45 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Listes des potagers</title>
-</head>
+
+<head th:insert="fragments/general.html :: header"></head>
+
 <body>
-<H1>La liste des potagers</H1>
-<ul>
-	<table style="border:1px solid black;">
-		<tr>
-			<th>Nom</th>
-			<th>Adresse</th>
-			<th>Surface</th>
-			<th>Ville</th>
-			<th>Nombre de carrés</th>
-			<th>Actions</th>
-		</tr>
-		<tr th:each="potager : ${list}">
-			<td><span th:text="${potager[0].nom}" /></td>
-			<td><a th:href="@{/potager/{id}(id=${potager[0].idPotager})}"><span th:text="${potager[0].nom}" /></a></td>
-			<td><span th:text="${potager[0].location}" /></td>
-			<td><span th:text="${potager[0].surface}" /></td>
-			<td><span th:text="${potager[0].ville}" /></td>
-			<td><span th:text="${potager[1]}" /></td>
-			<td colspan="2">
-				<a th:href="@{/potager/del/{id}(id=${potager[0].idPotager})}">X</a>
-				<a th:href="@{/potager/mod/{id}(id=${potager[0].idPotager})}">M</a>
-			</td>
-		</tr>
-	</table> 
-</ul>
-<a href="/potager/add">ajout</a>
+
+	<div class="container">
+		<div class="col-10 offset-1 mt-5">
+			<h1 class="text-center">Le beau Potager</h1>
+
+			<table class="table mt-5">
+				<thead>
+					<tr>
+						<th scope="col">Nom</th>
+						<th scope="col">Localisation</th>
+						<th scope="col">Surface</th>
+						<th scope="col">Ville</th>
+						<th scope="col">Surface Carres</th>
+						<th scope="col">Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="potager : ${list}">
+						<td th:text="${potager[0].nom}"></td>
+						<td th:text="${potager[0].location}"></td>
+						<td th:text="${potager[0].surface}"></td>
+						<td th:text="${potager[0].ville}"></td>
+						<td th:text="${potager[1]}"></td>
+						<td>
+							<a th:href="@{/potager/{id}(id=${potager[0].idPotager})}" class="btn btn-primary">Explorer</a>
+							<a th:href="@{/potager/mod/{id}(id=${potager[0].idPotager})}" class="btn btn-success">Modifier</a>
+							<a th:href="@{/potager/del/{id}(id=${potager[0].idPotager})}" class="btn btn-danger">Supprimer</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<a href="/potager/add" class="btn btn-primary">Ajouter un potager</a>
+		</div>
+	</div>
+
+	<script th:insert="fragments/general.html :: scriptBootstrap"></script>
 </body>
+
 </html>

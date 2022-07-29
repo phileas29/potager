@@ -35,19 +35,17 @@ public class PotagerApplication implements CommandLineRunner {
 		ArrayList<Potager> potagers = new ArrayList<Potager>();
 		potagers.add(new Potager("Lesquidic", "Jardins Philéasiens", 250000, "Gouesnac'h"));
 		potagers.add(new Potager("Toul ar C'Hoat", "Clément's Meadows", 800000, "Le Faou"));
-		for (Potager potager : potagers) {
+		for (Potager potager : potagers)
 			potagerManager.addPotager(potager);
-		}
 		
 		ArrayList<Plante> plantes = new ArrayList<Plante>();
 		plantes.add(new Plante("blette",EnumType.FEUILLE,"",50));
 		plantes.add(new Plante("tomate",EnumType.FRUIT,"coeur de boeuf",75));
 		plantes.add(new Plante("radis",EnumType.RACINE,"noir",25));
-		plantes.add(new Plante("�pinard",EnumType.FEUILLE,"g�ant d'hiver",20));
+		plantes.add(new Plante("pinard",EnumType.FEUILLE,"géant d'hiver",20));
 		plantes.add(new Plante("carotte",EnumType.RACINE,"chantenay",22));
-		for (Plante plante : plantes) {
+		for (Plante plante : plantes)
 			potagerManager.addPlante(plante);
-		}
 		
 		for (int i = 0; i < potagers.size(); i++) {
 			for (int j = 0; j < rnd.nextInt(5,20); j++) {
@@ -61,26 +59,18 @@ public class PotagerApplication implements CommandLineRunner {
 		}
 		
 		
-		ArrayList<Carre> carres = (ArrayList<Carre>) potagerManager.selectCarreByPotager(potagers.get(0));
+		ArrayList<Carre> carres = (ArrayList<Carre>) potagerManager.selectCarresByPotager(potagers.get(0));
 		
-		Plantation plantation = new Plantation(plantes.get(0), carres.get(0), 2, null, null);
-		potagerManager.addPlantation(plantation);
-		
+		potagerManager.addPlantation(new Plantation(plantes.get(0), carres.get(0), 2, null, null));
+		potagerManager.addPlantation(new Plantation(plantes.get(3), carres.get(4), 15, null, null));
 
-		
 		System.err.println("****************\nDEBUT AFFICHAGE\n****************");
 		System.out.println("****************\nLISTE POTAGERS :\n****************");
 		potagerManager.findAllPotager().forEach(System.out::println);
 		System.out.println("****************\nLISTE CARRES :\n****************");
-		potagerManager.finAllCarre().forEach(System.out::println);
+		potagerManager.findAllCarre().forEach(System.out::println);
 		System.out.println("****************\nLISTE PLANTES :\n****************");
 		potagerManager.findAllPlante().forEach(System.out::println);
-//		System.out.println("****************\nLISTE CARRE by potagers :\n****************");
-//		for (Potager p : potagers) {
-//			potagerManager.selectCarreByPotager(p).forEach(System.out::println);
-//		}
-		System.out.println("potagerbyID TEST");
-		System.out.println(potagerManager.getPotagerById(1));
 		
 		System.err.println("****************\nFIN AFFICHAGE\n****************");
 		

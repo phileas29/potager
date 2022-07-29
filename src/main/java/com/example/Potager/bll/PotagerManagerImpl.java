@@ -71,16 +71,16 @@ public class PotagerManagerImpl implements PotagerManager {
 	}
 
 	@Override
-	public List<Carre> selectCarreByPotager(Potager potager) {
-		return (List<Carre>) cDao.selectAllCarreByPotager(potager);
+	public List<Carre> selectCarresByPotager(Potager p) {
+		return (List<Carre>) cDao.selectAllCarresByPotager(p);
 	}
 
 	@Override
-	public List<Integer> countCarreByPotager() {
+	public List<Integer> countCarresByPotager() {
 		List<Integer> listInt = new ArrayList<Integer>();
 		List<Potager> list = (List<Potager>) pDao.findAll();
 		for (Potager potager2 : list) {
-			listInt.add(((List<Carre>)cDao.selectAllCarreByPotager(potager2)).size());
+			listInt.add(((List<Carre>)cDao.selectAllCarresByPotager(potager2)).size());
 		}
 		
 		return listInt;
@@ -96,7 +96,37 @@ public class PotagerManagerImpl implements PotagerManager {
 		
 		return pDao.findById(id).orElse(null);
 	}
-	
-	
 
+	@Override
+	public void addCarreToPotager(Potager potager, Carre carre) {
+		carre.setPotager(potager);
+		cDao.save(carre);		
+	}
+
+	@Override
+	public void delCarre(int id) {
+		cDao.deleteById(id);
+	}
+
+	@Override
+	public Iterable<Integer> countPlantationsByCarreOfPotager(Potager p) {
+		List<Integer> listInt = new ArrayList<Integer>();
+		List<Carre> list = (List<Carre>) cDao.selectAllCarresByPotager(p);
+		for (Carre c : list) {
+			listInt.add(((List<Plantation>)plaDao.selectAllPlantationsByCarre(c)).size());
+		}
+		
+		return listInt;
+	}
+
+	@Override
+	public Iterable<Plantation> selectAllPlantationsByCarre(Carre c) {
+		return (List<Plantation>) plaDao.selectAllPlantationsByCarre(c);
+	}
+
+	@Override
+	public Carre getCarreById(Integer id) {
+		
+		return cDao.findById(id).orElse(null);
+	}
 }

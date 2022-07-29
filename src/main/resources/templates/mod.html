@@ -1,29 +1,44 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Modification d'une potager</title>
-</head>
+<head th:insert="fragments/general.html :: header"></head>
+
 <body>
-<h1>Saisie</h1>
-<form th:action="@{/potager/mod/{id}(id=${potager.idPotager})}" th:object="${potager}" method="post">
-<label for="location">location:</label>
-	<input type="text" th:field="*{location}" id="location"/>
-	<span th:if="${#fields.hasErrors('location')}" th:errors="*{location}"/>
-	<br>
-	<label for="nom">nom:</label>
-	<input type="text" th:field="*{nom}" id="nom"/>
-	<span th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"/>
-	<br>
-	<label for="surface">surface:</label>
-	<input type="number" th:field="*{surface}" id="surface"/>
-	<span th:if="${#fields.hasErrors('surface')}" th:errors="*{surface}"/>
-	<br>
-	<label for="ville">ville:</label>
-	<input type="text" th:field="*{ville}" id="ville"/>
-	<span th:if="${#fields.hasErrors('ville')}" th:errors="*{ville}"/>
-	<br>
-	<input type="submit" value="valider"/>
-</form>
+
+	<div class="container">
+		<div class="col-10 offset-1 mt-5">
+			<h1 class="text-center">Modifier un Potager</h1>
+
+			<form th:action="@{/potager/mod/{id}(id=${potager.idPotager})}" th:object="${potager}" method="POST">
+				
+				<label for="nom" class="form-label">Nom :</label>
+				<input type="text" th:field="*{nom}" id="nom" class="form-control" value="${potager.nom}" />
+				<span th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}" />
+				<br>
+			
+				<label for="location" class="form-label">Localisation : </label>
+				<input type="text" th:field="*{location}" id="location" class="form-control" value="${potager.location}" />
+				<span th:if="${#fields.hasErrors('location')}" th:errors="*{location}" />
+				<br>
+				
+				<label for="surface" class="form-label">Surface : </label>
+				<input type="text" th:field="*{surface}" id="surface" class="form-control" value="${potager.surface}" />
+				<span th:if="${#fields.hasErrors('surface')}" th:errors="*{surface}" />
+				<br>
+				
+				<label for="ville" class="form-label">Ville : </label>
+				<input type="text" th:field="*{ville}" id="ville" class="form-control" value="${potager.ville}" />
+				<span th:if="${#fields.hasErrors('ville')}" th:errors="*{ville}" />
+				<br>
+				
+				<input type="submit" value="Enregistrer" class="btn btn-primary"/>
+				
+			</form>
+
+		</div>
+	</div>
+
+	<script th:insert="fragments/general.html :: scriptBootstrap"></script>
+</body>
+
 </body>
 </html>

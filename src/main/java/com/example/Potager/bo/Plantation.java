@@ -21,6 +21,11 @@ import lombok.ToString;
 @NoArgsConstructor
 public class Plantation {
 	
+	@Override
+	public String toString() {
+		return "Plantation [idPlantation=" + idPlantation + ", plante=" + plante + ", carre=" + carre + ", qte=" + qte
+				+ ", datePlantation=" + datePlantation + ", dateRecolte=" + dateRecolte + "]";
+	}
 	@Id
 	@GeneratedValue
 	private Integer idPlantation;

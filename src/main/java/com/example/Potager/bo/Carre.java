@@ -20,7 +20,7 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 public class Carre {
-	
+
 	@Id
 	@GeneratedValue
 	private Integer idCarre;
@@ -31,6 +31,14 @@ public class Carre {
 	
 	@ManyToOne
 	private Potager potager;
+
+	public Potager getPotager() {
+		return potager;
+	}
+
+	public void setPotager(Potager potager) {
+		this.potager = potager;
+	}
 
 	public Carre(int surface, EnumSol typeSol, EnumExpo typeExpo) {
 		super();

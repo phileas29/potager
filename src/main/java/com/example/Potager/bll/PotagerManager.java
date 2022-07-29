@@ -12,14 +12,19 @@ import com.example.Potager.bo.Potager;
 public interface PotagerManager {
 	
 	public void addCarreToPotager(Potager potager, int surface, EnumSol typeSol, EnumExpo typeExpo);
+	public void addCarreToPotager(Potager potager, Carre carre);
 	public void addPotager(Potager potager);
+	public void delCarre(int id);
 	public void delPotagerById(int id);
 	public Potager getPotagerById(Integer id);
 	public List<Potager> findAllPotager();
 	public List<Carre> findAllCarre();
 	public List<Plante> findAllPlante();
 	public void addPlante(Plante plante);
-	public Iterable<Carre> selectCarreByPotager(Potager potager);
-	public Iterable<Integer> countCarreByPotager();
+	public Iterable<Carre> selectCarresByPotager(Potager p);
+	public Iterable<Plantation> selectAllPlantationsByCarre(Carre c);
+	public Iterable<Integer> countCarresByPotager();
+	public Iterable<Integer> countPlantationsByCarreOfPotager(Potager p);
 	void addPlantation(Plantation pla);
+	public Carre getCarreById(Integer id);
 }
