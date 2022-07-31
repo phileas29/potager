@@ -6,9 +6,11 @@
 
 	<div class="container">
 		<div class="col-10 offset-1 mt-5">
-			<h1 class="text-center">Modifier un Potager</h1>
+			<h1 class="text-center">Modifier le potager n°<span th:text="${potager.idPotager}" /> "<span th:text="${potager.nom}" />"</h1>
 
 			<form th:action="@{/potager/mod/{id}(id=${potager.idPotager})}" th:object="${potager}" method="POST">
+			
+				<input type="hidden" th:field="*{idPotager}"/>
 				
 				<label for="nom" class="form-label">Nom :</label>
 				<input type="text" th:field="*{nom}" id="nom" class="form-control" value="${potager.nom}" />

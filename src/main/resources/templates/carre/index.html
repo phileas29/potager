@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head th:insert="fragments/general.html :: header"></head>
+
+<body>
+
+	<div class="container">
+		<div class="col-10 offset-1 mt-5">
+			<h1 class="text-center">La liste des plantations du carre n°<span th:text="${carre.idCarre}" /> du potager n°<span th:text="${potager.idPotager}" /> "<span th:text="${potager.nom}" />"</h1>
+
+			<table class="table mt-5 text-center">
+				<thead>
+					<tr>
+						<th scope="col">N°</th>
+						<th scope="col">Plante</th>
+						<th scope="col">Quantité</th>
+						<th scope="col">Date de plantation</th>
+						<th scope="col">Date de récolte</th>
+						<th scope="col">Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="plantation : ${plantations}">
+						<td th:text="${plantation.idPlantation}"></td>
+						<td th:text="${plantation.plante.nom}"></td>
+						<td th:text="${plantation.qte}"></td>
+						<td th:text="${plantation.datePlantation}"></td>
+						<td th:text="${plantation.dateRecolte}"></td>
+						<td>
+							<a th:href="@{/potager/{idP}/{idC}/{idPl}/mod(idP=${potager.idPotager},idC=${carre.idCarre},idPl=${plantation.idPlantation})}" class="btn btn-success">Modifier</a>
+							<a th:href="@{/potager/{idP}/{idC}/{idPl}/del(idP=${potager.idPotager},idC=${carre.idCarre},idPl=${plantation.idPlantation})}" class="btn btn-danger">Supprimer</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<a th:href="@{/}" class="btn btn-primary">Accueil</a>
+			<a th:href="@{/potager/{idP}(idP=${potager.idPotager})}" class="btn btn-primary">Retour</a>
+			<a th:href="@{/potager/{idP}/{idC}/add(idP=${potager.idPotager},idC=${carre.idCarre})}" class="btn btn-primary">Ajouter un plant</a>
+		</div>
+	</div>
+
+	<script th:insert="fragments/general.html :: scriptBootstrap"></script>
+</body>
+
+</html>

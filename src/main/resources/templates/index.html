@@ -16,7 +16,7 @@
 						<th scope="col">Localisation</th>
 						<th scope="col">Surface</th>
 						<th scope="col">Ville</th>
-						<th scope="col">Surface Carres</th>
+						<th scope="col">Nombre de carrés</th>
 						<th scope="col">Actions</th>
 					</tr>
 				</thead>
@@ -30,7 +30,8 @@
 						<td>
 							<a th:href="@{/potager/{id}(id=${potager[0].idPotager})}" class="btn btn-primary">Explorer</a>
 							<a th:href="@{/potager/mod/{id}(id=${potager[0].idPotager})}" class="btn btn-success">Modifier</a>
-							<a th:href="@{/potager/del/{id}(id=${potager[0].idPotager})}" class="btn btn-danger">Supprimer</a>
+							<a th:if="${potager[1]==0}" th:href="@{/potager/del/{id}(id=${potager[0].idPotager})}" class="btn btn-danger">Supprimer</a>
+							<button th:unless="${potager[1]==0}" class="btn btn-danger" disabled>Supprimer</button>
 						</td>
 					</tr>
 				</tbody>

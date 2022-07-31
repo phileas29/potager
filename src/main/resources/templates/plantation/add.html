@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head th:insert="fragments/general.html :: header"></head>
+
+<body>
+
+	<div class="container">
+		<div class="col-10 offset-1 mt-5">
+			<h1 class="text-center">Ajouter un plant dans le carré n°<span th:text="${carre.idCarre}" /> du potager n°<span th:text="${potager.idPotager}" /> "<span th:text="${potager.nom}" />"</h1>
+
+			<form th:action="@{/potager/{idP}/{idC}/add(idP=${potager.idPotager},idC=${carre.idCarre})}" th:object="${plantation}" method="POST">
+				
+				<label for="plantes" class="form-label">Plante :</label>
+			    <select class="form-select" name="plantes" th:field="*{plante.idPlante}">
+				    <option th:each="plante : ${plantes}" 
+				        th:value="${plante.idPlante}" th:text="${plante.nom}"></option>
+				</select>
+				<br>
+				
+				<label for="qte" class="form-label">Quantité :</label>
+				<input type="number" th:field="*{qte}" class="form-control" />
+				<span th:if="${#fields.hasErrors('qte')}" th:errors="*{qte}" />
+				<br>
+				
+				<label for="datePlantation" class="form-label">Date de la plantation :</label>
+				<input type="date" th:field="*{datePlantation}" class="form-control" />
+				<span th:if="${#fields.hasErrors('datePlantation')}" th:errors="*{datePlantation}" />
+				<br>
+				
+				<label for="dateRecolte" class="form-label">Date de la récolte :</label>
+				<input type="date" th:field="*{dateRecolte}" class="form-control" />
+				<span th:if="${#fields.hasErrors('dateRecolte')}" th:errors="*{dateRecolte}" />
+				<br>
+				
+				<input type="submit" value="Enregistrer" class="btn btn-primary"/>
+				
+			</form>
+
+		</div>
+	</div>
+
+	<script th:insert="fragments/general.html :: scriptBootstrap"></script>
+</body>
+
+</html>

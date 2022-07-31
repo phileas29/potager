@@ -7,25 +7,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
 @Entity
 @Data
-@ToString
-@Getter
-@Setter
 @NoArgsConstructor
 public class Plantation {
-	
-	@Override
-	public String toString() {
-		return "Plantation [idPlantation=" + idPlantation + ", plante=" + plante + ", carre=" + carre + ", qte=" + qte
-				+ ", datePlantation=" + datePlantation + ", dateRecolte=" + dateRecolte + "]";
-	}
 	@Id
 	@GeneratedValue
 	private Integer idPlantation;
@@ -45,7 +35,9 @@ public class Plantation {
 	private Carre carre;
 	
 	private Integer qte;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date datePlantation;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dateRecolte;
 
 }

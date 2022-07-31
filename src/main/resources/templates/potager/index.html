@@ -9,7 +9,7 @@
 		<div class="col-10 offset-1 mt-5">
 			<h1 class="text-center">La liste des carres du potager n°<span th:text="${potager.idPotager}" /> "<span th:text="${potager.nom}" />"</h1>
 
-			<table class="table mt-5">
+			<table class="table mt-5 text-center">
 				<thead>
 					<tr>
 						<th scope="col">N°</th>
@@ -28,14 +28,16 @@
 						<td th:text="${carre[0].typeExpo}"></td>
 						<td th:text="${carre[1]}"></td>
 						<td>
-							<a th:href="@{/potager/{idP}/{idC}/mod(idP=${potager.idPotager},idC=${carre[0].idCarre})}" class="btn btn-primary">Ajouter des plants</a>
-							<a th:href="@{/potager/{idP}/{idC}/mod(idP=${potager.idPotager},idC=${carre[0].idCarre})}" class="btn btn-success">Modifier</a>
-							<a th:href="@{/potager/{idP}/{idC}/del(idP=${potager.idPotager},idC=${carre[0].idCarre})}" class="btn btn-danger">Supprimer</a>
+							<a th:href="@{/carre/{id}(id=${carre[0].idCarre})}" class="btn btn-primary">Explorer</a>
+							<a th:href="@{/carre/mod/{id}(id=${carre[0].idCarre})}" class="btn btn-success">Modifier</a>
+							<a th:if="${carre[1] == 0}" th:href="@{/carre/del/{id}(id=${carre[0].idCarre})}" class="btn btn-danger">Supprimer</a>
+							<button th:unless="${carre[1]==0}" class="btn btn-danger" disabled>Supprimer</button>
 						</td>
 					</tr>
 				</tbody>
 			</table>
-			<a th:href="@{/potager/{idP}/add(idP=${potager.idPotager})}" class="btn btn-primary">Ajouter un carré</a>
+			<a th:href="@{/}" class="btn btn-primary">Accueil</a>
+			<a th:href="@{/carre/addToPotager/{id}(id=${potager.idPotager})}" class="btn btn-primary">Ajouter un carré</a>
 		</div>
 	</div>
 

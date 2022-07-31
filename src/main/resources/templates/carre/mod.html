@@ -9,7 +9,10 @@
 		<div class="col-10 offset-1 mt-5">
 			<h1 class="text-center">Modifier le carré n°<span th:text="${carre.idCarre}" /> carré dans le potager n°<span th:text="${potager.idPotager}" /> "<span th:text="${potager.nom}" />"</h1>
 
-			<form th:action="@{/potager/{idP}/{idC}/mod(idP=${potager.idPotager},idC=${carre.idCarre})}" th:object="${carre}" method="POST">
+			<form th:action="@{/carre/mod/{id}(id=${carre.idCarre})}" th:object="${carre}" method="POST">
+			
+				<input type="hidden" th:field="*{idCarre}"/>
+				<input type="hidden" th:field="*{potager}"/>
 				
 				<label for="surface" class="form-label">Surface :</label>
 				<input type="number" th:field="*{surface}" id="surface" class="form-control" value="${carre.surface}" />
@@ -17,16 +20,16 @@
 				<br>
 				
 				<label for="typeSol" class="form-label">Type de sol :</label>
-			    <select class="form-select" name="typeSol">
-				    <option th:each="type : ${T(com.example.Potager.bo.EnumSol).values()}" 
-				        th:value="${type}" th:text="${type}"></option>
+			    <select class="form-select" th:field="*{typeSol}">
+				    <option th:each="type : ${typesSol}" 
+				        th:value="${type}" th:text="${type}" th:selected="${type==carre.typeSol}"></option>
 				</select>
 				<br>
 				
 				<label for="typeExpo" class="form-label">Type de sol :</label>
 			    <select class="form-select" name="typeExpo">
-				    <option th:each="type : ${T(com.example.Potager.bo.EnumExpo).values()}" 
-				        th:value="${type}" th:text="${type}"></option>
+				    <option th:each="type : ${typesExpo}" 
+				        th:value="${type}" th:text="${type}" th:selected="${type==carre.typeExpo}"></option>
 				</select>
 				<br>
 				

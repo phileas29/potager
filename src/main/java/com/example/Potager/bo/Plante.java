@@ -12,9 +12,6 @@ import lombok.ToString;
 
 @Entity
 @Data
-@ToString
-@Getter
-@Setter
 @NoArgsConstructor
 public class Plante {
 	@Id

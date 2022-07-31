@@ -109,7 +109,7 @@ public class PotagerManagerImpl implements PotagerManager {
 	}
 
 	@Override
-	public Iterable<Integer> countPlantationsByCarreOfPotager(Potager p) {
+	public List<Integer> countPlantationsByCarreOfPotager(Potager p) {
 		List<Integer> listInt = new ArrayList<Integer>();
 		List<Carre> list = (List<Carre>) cDao.selectAllCarresByPotager(p);
 		for (Carre c : list) {
@@ -120,7 +120,7 @@ public class PotagerManagerImpl implements PotagerManager {
 	}
 
 	@Override
-	public Iterable<Plantation> selectAllPlantationsByCarre(Carre c) {
+	public List<Plantation> selectAllPlantationsByCarre(Carre c) {
 		return (List<Plantation>) plaDao.selectAllPlantationsByCarre(c);
 	}
 
@@ -128,5 +128,15 @@ public class PotagerManagerImpl implements PotagerManager {
 	public Carre getCarreById(Integer id) {
 		
 		return cDao.findById(id).orElse(null);
+	}
+
+	@Override
+	public Plantation getPlantationById(Integer id) {
+		return plaDao.findById(id).orElse(null);
+	}
+
+	@Override
+	public void delPlantation(int id) {
+		plaDao.deleteById(id);
 	}
 }

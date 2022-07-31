@@ -11,22 +11,22 @@
 			<form th:action="@{/potager/add}" th:object="${potager}" method="POST">
 				
 				<label for="nom" class="form-label">Nom :</label>
-				<input type="text" th:field="*{nom}" id="nom" class="form-control" />
+				<input type="text" th:field="*{nom}" class="form-control" />
 				<span th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}" />
 				<br>
 			
 				<label for="location" class="form-label">Localisation : </label>
-				<input type="text" th:field="*{location}" id="location" class="form-control" />
+				<input type="text" th:field="*{location}" class="form-control" />
 				<span th:if="${#fields.hasErrors('location')}" th:errors="*{location}" />
 				<br>
 				
 				<label for="surface" class="form-label">Surface : </label>
-				<input type="text" th:field="*{surface}" id="surface" class="form-control" />
+				<input type="number" th:field="*{surface}" class="form-control" />
 				<span th:if="${#fields.hasErrors('surface')}" th:errors="*{surface}" />
 				<br>
 				
 				<label for="ville" class="form-label">Ville : </label>
-				<input type="text" th:field="*{ville}" id="ville" class="form-control" />
+				<input type="text" th:field="*{ville}" class="form-control" />
 				<span th:if="${#fields.hasErrors('ville')}" th:errors="*{ville}" />
 				<br>
 				

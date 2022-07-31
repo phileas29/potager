@@ -73,14 +73,6 @@ public class PotagerApplication implements CommandLineRunner {
 		potagerManager.findAllPlante().forEach(System.out::println);
 		
 		System.err.println("****************\nFIN AFFICHAGE\n****************");
-		
-
-		
-		
-		
-		
-		
-		
 	}
 
 }
