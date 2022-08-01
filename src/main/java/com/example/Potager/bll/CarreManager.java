@@ -13,12 +13,12 @@ import com.example.Potager.dal.CarreDAO;
 
 @Service
 public class CarreManager extends CRUDManager<Carre, CarreDAO> {
-	
-	public List<Integer> countAllCarresByPotager() {
-		return dao.countAllCarresByPotager();
-	}
 	public List<Carre> findByPotager(Potager potager) {
 		return dao.findByPotager(potager);
+	}
+	
+	public List<Integer> countAllPlantationsByCarre(Potager p) {
+		return dao.countAllPlantationsByCarre(p);
 	}
 
 	@Override
@@ -30,7 +30,7 @@ public class CarreManager extends CRUDManager<Carre, CarreDAO> {
 			int surfaceUtilise = dao.findByPotager(entity.getPotager()).stream()
 			.mapToInt(c -> c.getSurface())
 			.sum();
-			if(surfaceUtilise+entity.getSurface()>entity.getPotager().getSurface()) {
+			if( entity.getPotager().getSurface() < surfaceUtilise + entity.getSurface() ) {
 				throw new PotagerException("Un carre de "+entity.getSurface()+"m2 ne peut s'insérer "
 						+ "dans un potager occupé dont "+surfaceUtilise+"m2 sont déjà utilisé sur "
 						+entity.getPotager().getSurface()+"m2");

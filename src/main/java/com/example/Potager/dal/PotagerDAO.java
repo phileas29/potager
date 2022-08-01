@@ -10,8 +10,6 @@ import com.example.Potager.bo.Carre;
 import com.example.Potager.bo.Potager;
 
 public interface PotagerDAO extends CrudRepository<Potager, Integer> {
-	
-//	@Query("select p,count(c) from Potager p inner join Carre c on c.potager.idPotager=p.idPotager group by p.idPotager")
-//	List<Object> selectAllPotagerWithNumberCarres(@Param("potager") Potager potager);
-
+	@Query("select count(c) from Potager p left join Carre c on c.potager=p group by p")
+	List<Integer> countAllCarresByPotager();
 }
