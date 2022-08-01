@@ -9,7 +9,7 @@
 		<div class="col-10 offset-1 mt-5">
 			<h1 class="text-center">Ajouter un plant dans le carré n°<span th:text="${carre.idCarre}" /> du potager n°<span th:text="${potager.idPotager}" /> "<span th:text="${potager.nom}" />"</h1>
 
-			<form th:action="@{/potager/{idP}/{idC}/add(idP=${potager.idPotager},idC=${carre.idCarre})}" th:object="${plantation}" method="POST">
+			<form th:action="@{/plantation/addToCarre/{id}(id=${carre.idCarre})}" th:object="${plantation}" method="POST">
 				
 				<label for="plantes" class="form-label">Plante :</label>
 			    <select class="form-select" name="plantes" th:field="*{plante.idPlante}">

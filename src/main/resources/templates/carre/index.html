@@ -28,15 +28,15 @@
 						<td th:text="${plantation.datePlantation}"></td>
 						<td th:text="${plantation.dateRecolte}"></td>
 						<td>
-							<a th:href="@{/potager/{idP}/{idC}/{idPl}/mod(idP=${potager.idPotager},idC=${carre.idCarre},idPl=${plantation.idPlantation})}" class="btn btn-success">Modifier</a>
-							<a th:href="@{/potager/{idP}/{idC}/{idPl}/del(idP=${potager.idPotager},idC=${carre.idCarre},idPl=${plantation.idPlantation})}" class="btn btn-danger">Supprimer</a>
+							<a th:href="@{/plantation/mod/{id}(id=${plantation.idPlantation})}" class="btn btn-success">Modifier</a>
+							<a th:href="@{/plantation/del/{id}(id=${plantation.idPlantation})}" class="btn btn-danger">Supprimer</a>
 						</td>
 					</tr>
 				</tbody>
 			</table>
 			<a th:href="@{/}" class="btn btn-primary">Accueil</a>
-			<a th:href="@{/potager/{idP}(idP=${potager.idPotager})}" class="btn btn-primary">Retour</a>
-			<a th:href="@{/potager/{idP}/{idC}/add(idP=${potager.idPotager},idC=${carre.idCarre})}" class="btn btn-primary">Ajouter un plant</a>
+			<a th:href="@{/potager/{id}(id=${potager.idPotager})}" class="btn btn-primary">Retour</a>
+			<a th:href="@{/plantation/addToCarre/{id}(id=${carre.idCarre})}" class="btn btn-primary">Ajouter un plant</a>
 		</div>
 	</div>
 

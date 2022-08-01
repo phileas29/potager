@@ -3,6 +3,7 @@ package com.example.Potager.ihm;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -18,6 +19,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.Potager.bll.CarreManager;
+import com.example.Potager.bll.PlantationManager;
+import com.example.Potager.bll.PlanteManager;
 import com.example.Potager.bll.PotagerException;
 import com.example.Potager.bll.PotagerManager;
 import com.example.Potager.bo.Carre;
@@ -26,6 +30,7 @@ import com.example.Potager.bo.EnumSol;
 import com.example.Potager.bo.Plantation;
 import com.example.Potager.bo.Plante;
 import com.example.Potager.bo.Potager;
+import com.mysql.cj.x.protobuf.MysqlxDatatypes.Array;
 
 
 
@@ -33,7 +38,16 @@ import com.example.Potager.bo.Potager;
 @RequestMapping("/")
 public class PotagerController {
 	@Autowired
-	PotagerManager manager;
+	PotagerManager potagerManager;
+
+	@Autowired
+	CarreManager carreManager;
+
+	@Autowired
+	PlanteManager planteManager;
+	
+	@Autowired
+	PlantationManager plantationManager;
 	
 	@PostConstruct
 	public void init() throws PotagerException {
@@ -42,18 +56,15 @@ public class PotagerController {
 	//accueil
 	@GetMapping("")
 	public String index(Model model) {
-		ArrayList<Integer> c = (ArrayList<Integer>)manager.countCarresByPotager();
-		ArrayList<Potager> p = (ArrayList<Potager>)manager.findAllPotager();
-		ArrayList<Object> l = new ArrayList<Object>();
-		
-		for (int i=0;i<p.size();i++) {
-			ArrayList<Object> e = new ArrayList<Object>();
-			e.add(p.get(i));
-			e.add(c.get(i));
-			l.add(e);
-		}
+		List<Potager> p = potagerManager.findAll();
+		List<Integer> c = carreManager.countAllCarresByPotager();
+		List<Object> l = new ArrayList<Object>();
+
+		Iterator<Potager> pi = p.iterator();
+		Iterator<Integer> ci = c.iterator();
+	    while (pi.hasNext() && ci.hasNext())
+	        l.add(Arrays.asList(pi.next(),ci.next()));
 		model.addAttribute("list",l);
-	
 		
 		return "index";
 	}
@@ -70,27 +81,34 @@ public class PotagerController {
 			return "potager/add";
 		}
 		
-		manager.addPotager(potager);
+		try {
+			potagerManager.add(potager);
+		} catch (PotagerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return "redirect:/";
 	}
 
 	//explorer un potager
 	@GetMapping("/potager/{id}")
 	public String getPotager(@PathVariable("id") Integer id, Model model) {
-		Potager potager = manager.getPotagerById(id);
+		Potager potager = potagerManager.findById(id);
 		model.addAttribute("potager", potager);
-		
-		ArrayList<Carre> c = (ArrayList<Carre>)manager.selectCarresByPotager(potager);
-		ArrayList<Integer> pl = (ArrayList<Integer>)manager.countPlantationsByCarreOfPotager(potager);
-		ArrayList<Object> carres = new ArrayList<Object>();
-		
-		for (int i=0;i<c.size();i++) {
-			ArrayList<Object> e = new ArrayList<Object>();
-			e.add(c.get(i));
-			e.add(pl.get(i));
-			carres.add(e);
-		}
+
+		List<Carre> c = carreManager.findByPotager(potager);
+		List<Integer> pl = plantationManager.countAllPlantationsByCarre(potager);
+		List<Object> carres = new ArrayList<Object>();
+
+		System.out.println(c);
+		System.out.println(pl);
+		Iterator<Carre> ci = c.iterator();
+		Iterator<Integer> pli = pl.iterator();
+	    while (ci.hasNext() && pli.hasNext())
+	        carres.add(Arrays.asList(ci.next(),pli.next()));
 		model.addAttribute("carres", carres);
+		
+		System.out.println(carres);
 	
 		return "potager/index";
 	}
@@ -196,63 +214,63 @@ public class PotagerController {
 	//////////////CRUD plantation
 	
 	//add plant
-//	@GetMapping("/plantation/{idP}/{idC}/add")
-	@GetMapping("/plantation/add/")
-	public String addPlant(@PathVariable("idP") Integer idP,@PathVariable("idC") Integer idC, Plantation plant , Model model) {
-		Carre c = manager.getCarreById(idC);
-		Potager potager = manager.getPotagerById(idP);
+	@GetMapping("/plantation/addToCarre/{id}")
+	public String addPlant(@PathVariable("id") Integer id, Plantation plant , Model model) {
+		Carre c = manager.getCarreById(id);
+		Potager potager = c.getPotager();
 		List<Plante> plantes = manager.findAllPlante();
+		plant.setCarre(c);
 		model.addAttribute("potager", potager);
 		model.addAttribute("carre", c);
 		model.addAttribute("plantation", plant);
 		model.addAttribute("plantes", plantes);
-		return "addPlant";
+		return "plantation/add";
 	}
 	
 	//add plant
-	@PostMapping("/plantation/{idP}/{idC}/add")
-	public String addPlant(@PathVariable("idP") Integer idP,@PathVariable("idC") Integer idC,@Valid Plantation pla, BindingResult errors, Model model) {
+	@PostMapping("/plantation/addToCarre/{id}")
+	public String addPlant(@PathVariable("id") Integer id,@Valid Plantation pla, BindingResult errors, Model model) {
 		if(errors.hasErrors()) {
-			return "redirect:/potager/{idP}/{idC}";
+			return "plantation/add";
 		}
-		Carre c = manager.getCarreById(idC);
-		pla.setCarre(c);
+		pla.setCarre(manager.getCarreById(id));
 		manager.addPlantation(pla);
-		return "redirect:/potager/{idP}/{idC}";
+		return "redirect:/carre/{id}";
 	}
 	
 	//mod plant
-	@GetMapping("/plantation/{idP}/{idC}/{idPl}/mod")
-	public String modPlant(@PathVariable("idP") Integer idP,@PathVariable("idC") Integer idC,@PathVariable("idPl") Integer idPl, Model model) {
-		Plantation pl = manager.getPlantationById(idPl);
-		Potager potager = manager.getPotagerById(idP);
-		Carre c = manager.getCarreById(idC);
-		List<Plante> plantes = manager.findAllPlante();
-		model.addAttribute("potager", potager);
+	@GetMapping("/plantation/mod/{id}")
+	public String modPlant(@PathVariable("id") Integer id, Model model) {
+		Plantation pl = manager.getPlantationById(id);
+		Carre c = pl.getCarre();
 		model.addAttribute("carre", c);
+		model.addAttribute("potager", c.getPotager());
 		model.addAttribute("plantation", pl);
-		model.addAttribute("plantes", plantes);
-		return "modPlant";
+		model.addAttribute("plantes", manager.findAllPlante());
+		return "plantation/mod";
 	}
 
 	//mod plant
-	@PostMapping("/plantation/{idP}/{idC}/{idPl}/mod")
-	public String modPlant(@PathVariable("idP") Integer idP,@PathVariable("idC") Integer idC,@PathVariable("idPl") Integer idPl,@Valid Plantation pla, BindingResult errors, Model model) {
+	@PostMapping("/plantation/mod/{id}")
+	public String modPlant(@PathVariable("id") Integer id,@Valid Plantation pla, BindingResult errors, Model model) {
 		if(errors.hasErrors()) {
-			return "modPlant";
+			Carre c = pla.getCarre();
+			model.addAttribute("carre", c);
+			model.addAttribute("potager", c.getPotager());
+			model.addAttribute("plantation", pla);
+			model.addAttribute("plantes", manager.findAllPlante());
+			return "plantation/mod";
 		}
-		Carre c = manager.getCarreById(idC);
-		pla.setCarre(c);
-		pla.setIdPlantation(idPl);
 		manager.addPlantation(pla);
-		return "redirect:/potager/{idP}/{idC}";
+		return "redirect:/carre/"+pla.getCarre().getIdCarre();
 	}
 	
 	//del plant
-	@GetMapping("/plantation/{idP}/{idC}/{idPl}/del")
-	public String delPlant(@PathVariable("idPl") Integer id, Model model) {
+	@GetMapping("/plantation/del/{id}")
+	public String delPlant(@PathVariable("id") Integer id, Model model) {
+		Integer idCarre = manager.getPlantationById(id).getCarre().getIdCarre();
 		manager.delPlantation(id);
-		return "redirect:/potager/{idP}/{idC}";
+		return "redirect:/carre/"+idCarre;
 	}
 	//////////////FIN (CRUD plantation)
 }

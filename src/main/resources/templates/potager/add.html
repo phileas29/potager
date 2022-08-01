@@ -9,6 +9,8 @@
 			<h1 class="text-center">Ajouter un Potager</h1>
 
 			<form th:action="@{/potager/add}" th:object="${potager}" method="POST">
+			
+				<input type="hidden" th:field="*{carre}"/>
 				
 				<label for="nom" class="form-label">Nom :</label>
 				<input type="text" th:field="*{nom}" class="form-control" />

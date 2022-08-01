@@ -1,4 +1,4 @@
-package com.example.Potager.bll;
+package com.example.Potager.old;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -139,4 +139,9 @@ public class PotagerManagerImpl implements PotagerManager {
 	public void delPlantation(int id) {
 		plaDao.deleteById(id);
 	}
+
+//	@Override
+//	public List<Object> selectAllPotagerWithNumberCarres(Potager p) {
+//		return pDao.selectAllPotagerWithNumberCarres(p);
+//	}
 }
