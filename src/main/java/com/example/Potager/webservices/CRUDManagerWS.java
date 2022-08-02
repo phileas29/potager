@@ -29,11 +29,11 @@ public abstract class CRUDManagerWS<E,DAO extends CrudRepository<E, Integer>> {
 	 */
 	@GetMapping("/{id}")
 	public E show(@PathVariable("id") Integer id) {
-		return (E) dao.findById(id);
+		return dao.findById(id).orElse(null);
 	}
 	
 	/**
-	 * @param potager
+	 * @param entity
 	 */
 	@PostMapping("")
 	public void add(@RequestBody E entity) {
@@ -49,7 +49,7 @@ public abstract class CRUDManagerWS<E,DAO extends CrudRepository<E, Integer>> {
 	}
 	
 	/**
-	 * @param id
+	 * @param entity
 	 */
 	@PutMapping("")
 	public void update(@RequestBody E entity) {
