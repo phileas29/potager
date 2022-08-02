@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
 
-<head th:insert="fragments/general.html :: header"></head>
+<head th:replace="fragments/general.html :: header"></head>
 
 <body>
 
 	<div class="container">
 		<div class="col-10 offset-1 mt-5">
+			
 			<h1 class="text-center">La liste des carres du potager n°<span th:text="${potager.idPotager}" /> "<span th:text="${potager.nom}" />"</h1>
 
 			<table class="table mt-5 text-center">
@@ -41,7 +42,7 @@
 		</div>
 	</div>
 
-	<script th:insert="fragments/general.html :: scriptBootstrap"></script>
+	<script th:replace="fragments/general.html :: scriptBootstrap"></script>
 </body>
 
 </html>

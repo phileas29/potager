@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.Potager.bll.CarreManager;
 import com.example.Potager.bll.PlantationManager;
@@ -40,23 +41,22 @@ public class CarreController {
 	@Autowired
 	PlantationManager plantationManager;
 
-	//////////////CRUD carre
 	//add carre
 	@GetMapping("/addToPotager/{id}")
 	public String addCarre(@PathVariable("id") Integer id,Carre carre, Model model) {
-		model.addAttribute("typesExpo", Arrays.asList(EnumExpo.values()));
 		model.addAttribute("typesSol", Arrays.asList(EnumSol.values()));
+		model.addAttribute("typesExpo", Arrays.asList(EnumExpo.values()));
 		model.addAttribute("potager", potagerManager.findById(id));
 		return "carre/add";
 	}
 	
 	//add carre
 	@PostMapping("/addToPotager/{id}")
-	public String addCarre(@PathVariable("id") Integer id,@Valid Carre carre, BindingResult errors, Model model) {
+	public String addCarre(@PathVariable("id") Integer id,@Valid Carre carre, BindingResult errors, Model model,RedirectAttributes attributes) {
 		Potager potager = potagerManager.findById(id);
 		if(errors.hasErrors()) {
-			model.addAttribute("typesExpo", Arrays.asList(EnumExpo.values()));
 			model.addAttribute("typesSol", Arrays.asList(EnumSol.values()));
+			model.addAttribute("typesExpo", Arrays.asList(EnumExpo.values()));
 			model.addAttribute("potager", potager);
 			return "carre/add";
 		}
@@ -64,8 +64,8 @@ public class CarreController {
 		try {
 			carreManager.add(carre);
 		} catch (PotagerException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			attributes.addFlashAttribute("error", e.toString());
+			return "redirect:{id}";
 		}
 		return "redirect:/potager/{id}";
 	}
@@ -79,7 +79,7 @@ public class CarreController {
 		model.addAttribute("potager", potager);
 		model.addAttribute("carre", c);
 		model.addAttribute("plantations", plants);
-	
+
 		return "carre/index";
 	}
 
@@ -120,5 +120,4 @@ public class CarreController {
 		carreManager.deleteById(id);
 		return "redirect:/potager/"+idPotager;
 	}
-	//////////////FIN (CRUD carre)
 }

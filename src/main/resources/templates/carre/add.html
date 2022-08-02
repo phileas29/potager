@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html>
 
-<head th:insert="fragments/general.html :: header"></head>
+<head th:replace="fragments/general.html :: header"></head>
 
 <body>
 
 	<div class="container">
 		<div class="col-10 offset-1 mt-5">
-			<h1 class="text-center">Ajouter un carrÃ© dans le potager nÂ°<span th:text="${potager.idPotager}" /> "<span th:text="${potager.nom}" />"</h1>
+			<div th:if="${error!=null}" class="alert alert-danger alert-dismissible fade show" role="alert">
+				<span th:text="${error}"/>
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			</div>
+			
+			<h1 class="text-center">Ajouter un carré dans le potager n°<span th:text="${potager.idPotager}" /> "<span th:text="${potager.nom}" />"</h1>
 
 			<form th:action="@{/carre/addToPotager/{id}(id=${potager.idPotager})}" th:object="${carre}" method="POST">
 				
@@ -24,7 +29,7 @@
 				<br>
 				
 				<label for="typeExpo" class="form-label">Type de sol :</label>
-			    <select class="form-select" name="typeExpo">
+			    <select class="form-select" th:field="*{typeExpo}">
 				    <option th:each="type : ${typesExpo}" 
 				        th:value="${type}" th:text="${type}"></option>
 				</select>
@@ -37,7 +42,7 @@
 		</div>
 	</div>
 
-	<script th:insert="fragments/general.html :: scriptBootstrap"></script>
+	<script th:replace="fragments/general.html :: scriptBootstrap"></script>
 </body>
 
 </html>

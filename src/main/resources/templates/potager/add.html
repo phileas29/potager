@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
-<head th:insert="fragments/general.html :: header"></head>
+<head th:replace="fragments/general.html :: header"></head>
 
 <body>
 
 	<div class="container">
 		<div class="col-10 offset-1 mt-5">
+			
 			<h1 class="text-center">Ajouter un Potager</h1>
 
 			<form th:action="@{/potager/add}" th:object="${potager}" method="POST">
@@ -37,7 +38,7 @@
 		</div>
 	</div>
 
-	<script th:insert="fragments/general.html :: scriptBootstrap"></script>
+	<script th:replace="fragments/general.html :: scriptBootstrap"></script>
 </body>
 
 </html>

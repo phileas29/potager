@@ -46,8 +46,8 @@ public class PotagerApplication implements CommandLineRunner {
 		rnd.setSeed(System.currentTimeMillis());
 		
 		ArrayList<Potager> potagers = new ArrayList<Potager>();
-		potagers.add(new Potager("Lesquidic", "Jardins PhilÃ©asiens", 250000, "Gouesnac'h"));
-		potagers.add(new Potager("Toul ar C'Hoat", "ClÃ©ment's Meadows", 800000, "Le Faou"));
+		potagers.add(new Potager("Lesquidic", "Jardins Philéasiens", 250000, "Gouesnac'h"));
+		potagers.add(new Potager("Toul ar C'Hoat", "Clément's Meadows", 800000, "Le Faou"));
 		for (Potager potager : potagers)
 			potagerManager.add(potager);
 		
@@ -55,7 +55,7 @@ public class PotagerApplication implements CommandLineRunner {
 		plantes.add(new Plante("blette",EnumType.FEUILLE,"",50));
 		plantes.add(new Plante("tomate",EnumType.FRUIT,"coeur de boeuf",75));
 		plantes.add(new Plante("radis",EnumType.RACINE,"noir",25));
-		plantes.add(new Plante("pinard",EnumType.FEUILLE,"gÃ©ant d'hiver",20));
+		plantes.add(new Plante("pinard",EnumType.FEUILLE,"géant d'hiver",20));
 		plantes.add(new Plante("carotte",EnumType.RACINE,"chantenay",22));
 		for (Plante plante : plantes)
 			planteManager.add(plante);

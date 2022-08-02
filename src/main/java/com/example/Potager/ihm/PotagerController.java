@@ -46,7 +46,6 @@ public class PotagerController {
 	public void init() throws PotagerException {
 	}
 	
-	//////////////CRUD potager
 	@GetMapping("/add")
 	public String addPotager(Potager potager, Model model) {
 		return "potager/add";
@@ -115,5 +114,4 @@ public class PotagerController {
 		potagerManager.deleteById(id);
 		return "redirect:/";
 	}
-	//////////////FIN (CRUD potager)
 }
