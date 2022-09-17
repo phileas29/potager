@@ -58,6 +58,14 @@ public class PlantationController {
 	@PostMapping("/addToCarre/{id}")
 	public String addPlant(@PathVariable("id") Integer id,@Valid Plantation pla, BindingResult errors, Model model) {
 		if(errors.hasErrors()) {
+			Carre c = carreManager.findById(id);
+			Potager potager = c.getPotager();
+			List<Plante> plantes = planteManager.findAll();
+			pla.setCarre(c);
+			model.addAttribute("potager", potager);
+			model.addAttribute("carre", c);
+			model.addAttribute("plantation", pla);
+			model.addAttribute("plantes", plantes);
 			return "plantation/add";
 		}
 		pla.setCarre(carreManager.findById(id));

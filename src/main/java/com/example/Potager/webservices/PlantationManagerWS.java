@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.Potager.bo.Carre;
 import com.example.Potager.bo.Plantation;
+import com.example.Potager.dal.CarreDAO;
 import com.example.Potager.dal.PlantationDAO;
 import com.example.Potager.dal.PotagerDAO;
 
@@ -17,9 +18,12 @@ import com.example.Potager.dal.PotagerDAO;
 public class PlantationManagerWS extends CRUDManagerWS<Plantation, PlantationDAO> {
 	@Autowired
 	PlantationDAO dao;
+	@Autowired
+	CarreDAO carreDao;
 	
 	@GetMapping("/inCarre/{id}")
 	public List<Plantation> findAllPlantationsByCarre(Integer id) {
-		return dao.findAllPlantationsByCarre(id);
+		return null;
+		//return dao.findAllPlantationsByCarre(carreDao.findById(id));
 	}
 }
